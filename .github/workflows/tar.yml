@@ -31,7 +31,7 @@ jobs:
       - name: saveSpace
         run: rm -rf /opt/hostedtoolcache
       - name: export
-        run: docker save ConvertImage:latest -o ConvertImage.tar
+        run: docker save convertimage:latest -o ConvertImage.tar
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
