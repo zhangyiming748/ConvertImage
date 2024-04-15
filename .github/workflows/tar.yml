@@ -27,7 +27,7 @@ jobs:
       - name: pwd
         run: pwd
       - name: build
-        run: docker build -t ConvertImage:latest ${{ github.workspace }}
+        run: docker build -t convertimage:latest ${{ github.workspace }}
       - name: saveSpace
         run: rm -rf /opt/hostedtoolcache
       - name: export
