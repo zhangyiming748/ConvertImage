@@ -15,7 +15,6 @@ import (
 
 func main() {
 	sql.SetEngine()
-
 	if root := os.Getenv("root"); root == "" {
 		slog.Info("$root为空,使用默认值", slog.String("$root", constant.GetRoot()))
 	} else {
@@ -26,7 +25,6 @@ func main() {
 		slog.Info("不使用优雅退出")
 	} else {
 		go util.ExitAfterRun()
-
 	}
 	if level := os.Getenv("level"); level == "" {
 		slog.Info("$level为空,使用默认值", slog.String("$level", constant.GetLevel()))
@@ -75,7 +73,7 @@ func setLog(level string) {
 	}
 	fp := strings.Join([]string{constant.GetRoot(), "ConvImage.log"}, string(os.PathSeparator))
 	fmt.Printf("数据库位置%v\n", fp)
-	logf, err := os.OpenFile(fp, os.O_RDWR|os.O_CREATE, 0770)
+	logf, err := os.OpenFile(fp, os.O_RDWR|os.O_CREATE, 0777)
 	if err != nil {
 		panic(err)
 	}
