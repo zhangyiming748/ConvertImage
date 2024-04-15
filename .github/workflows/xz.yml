@@ -6,7 +6,7 @@ on:
   push:
     # run only against tags
     tags:
-      - "xz:*"
+      - "xz*"
     # branches: [ "master" ]
 
 permissions:

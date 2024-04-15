@@ -6,7 +6,7 @@ on:
   push:
     # run only against tags
     tags:
-      - "tar:*"
+      - "tar*"
     # branches: [ "master" ]
 
 permissions:
