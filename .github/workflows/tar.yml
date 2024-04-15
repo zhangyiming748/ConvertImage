@@ -1,0 +1,39 @@
+# .github/workflows/release.yml
+name: tar_releaser
+
+on:
+  pull_request:
+  push:
+    # run only against tags
+    tags:
+      - "tar:*"
+    # branches: [ "master" ]
+
+permissions:
+  contents: write
+  # packages: write
+  # issues: write
+
+jobs:
+  dockerbuilder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: go
+        run: go build -o srt main.go
+      - name: pwd
+        run: pwd
+      - name: build
+        run: docker build -t ConvertImage:latest ${{ github.workspace }}
+      - name: saveSpace
+        run: rm -rf /opt/hostedtoolcache
+      - name: export
+        run: docker save ConvertImage:latest -o ConvertImage.tar
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ github.workspace }}/ConvertImage.tar
+          compression-level: 9 # max compression
