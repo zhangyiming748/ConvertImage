@@ -12,3 +12,6 @@ go.work
 *.log
 *.db
 main
+*.tar
+*.xz
+*.zip
