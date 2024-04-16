@@ -11,11 +11,11 @@ RUN mkdir -p /root/app
 WORKDIR /root/app
 COPY . .
 RUN chmod +x /root/app/install-retry.sh
-RUN /root/app/install-retry.sh ffmpeg nano mediainfo build-essential
+# RUN /root/app/install-retry.sh ffmpeg nano mediainfo build-essential
 RUN go build -o /usr/local/bin/conv main.go
 RUN chmod +x /usr/local/bin/conv
 WORKDIR /usr/local/bin
 CMD ["conv"]
-# docker build -t images:6 --no-cache .
-# docker run -d -v /c/Users/zen/Downloads/Telegraph:/data images:6
+# docker build -t images:12  .
+# docker run -d --name leave --cpus=2 --memory=4096M -v /c/Users/zen/Pictures/Screenshots:/data images:12
 # docker run -itd  --cpus=1 --memory=2048M --name test -v /f/large/bodysuit:/data test:5

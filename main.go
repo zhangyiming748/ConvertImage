@@ -11,21 +11,19 @@ import (
 	"log/slog"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
-	sql.SetEngine()
+
 	if root := os.Getenv("root"); root == "" {
 		slog.Info("$root为空,使用默认值", slog.String("$root", constant.GetRoot()))
 	} else {
 		constant.SetRoot(root)
 		slog.Info("$root不为空", slog.String("$root", root))
 	}
-	if util.GetRoot() == "/data" {
-		slog.Info("不使用优雅退出")
-	} else {
-		go util.ExitAfterRun()
-	}
+	// TODO  容器中不需要使用控制台方法退出
+	// go util.ExitAfterRun()
 	if level := os.Getenv("level"); level == "" {
 		slog.Info("$level为空,使用默认值", slog.String("$level", constant.GetLevel()))
 		setLog(constant.GetLevel())
@@ -34,6 +32,8 @@ func main() {
 		slog.Info("$level不为空", slog.String("$level", level))
 		setLog(constant.GetLevel())
 	}
+	sql.SetEngine()
+	time.Sleep(1 * time.Hour)
 	files := util.GetAllFiles(constant.Root)
 	fmt.Printf("符合条件的文件%v\n", files)
 	for _, file := range files {

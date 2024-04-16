@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '/mnt/c/Users/zen/Downloads:/data'
+      - '/c/Users/zen/Pictures/Screenshots:/data'
     deploy:
       resources:
         limits:
@@ -15,6 +15,4 @@ services:
           cpus: '4'
     environment:
       - root=/data
-      - to=vp9
-      - level=Info
-      - direction=ToRight
+      - level=Debug

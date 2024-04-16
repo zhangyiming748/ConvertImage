@@ -22,10 +22,10 @@ func ExitAfterRun() {
 	go func() {
 		for {
 			input, _ := reader.ReadString('\n')
-			fmt.Printf("You entered is %T\t%v", input, input)
+			// todo os.IsExist()
+			fmt.Printf("You entered is %T\t%v sss \n", input, input)
 			if input == "q\n" || input == "q\r\n" {
 				slog.Debug("接收到q")
-				//ExitAfterDone = true
 				SetExitStatus(true)
 				slog.Info("退出状态改变", slog.Bool("新值", ExitAfterDone))
 			}

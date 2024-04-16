@@ -19,7 +19,7 @@ func init() {
 }
 
 func SetEngine() {
-	fp := strings.Join([]string{constant.GetRoot(), "ConImage.db"}, string(os.PathSeparator))
+	fp := strings.Join([]string{constant.GetRoot(), "ConvImage.db"}, string(os.PathSeparator))
 	fmt.Printf("数据库位置%v\n", fp)
 	db, _ = gorm.Open(sqlite.Open(fp), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Warn),
