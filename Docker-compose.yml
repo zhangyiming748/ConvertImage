@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      cache_from: []
     volumes:
       - '/c/Users/zen/Pictures/Screenshots:/data'
     deploy:
