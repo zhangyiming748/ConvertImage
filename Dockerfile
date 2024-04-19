@@ -21,4 +21,5 @@ WORKDIR /usr/local/bin
 CMD ["conv"]
 # docker build -t images:16  .
 # docker run -d --name leave --cpus=2 --memory=4096M -v /d/backup/.telegram:/data images:16
+# docker run -d --rm --name leave  -v /d/backup/.telegram:/data images:16
 # docker run -itd  --cpus=1 --memory=2048M --name test -v /f/large/bodysuit:/data test:5

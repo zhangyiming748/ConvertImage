@@ -95,7 +95,7 @@ func setLog(level string) {
 	}
 	fp := strings.Join([]string{constant.GetRoot(), "ConvImage.log"}, string(os.PathSeparator))
 	fmt.Printf("数据库位置%v\n", fp)
-	logf, err := os.OpenFile(fp, os.O_RDWR|os.O_CREATE, 0777)
+	logf, err := os.OpenFile(fp, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0777)
 	if err != nil {
 		panic(err)
 	}
