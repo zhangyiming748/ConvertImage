@@ -10,8 +10,8 @@ import (
 	"io"
 	"log/slog"
 	"os"
+	"path/filepath"
 	"strings"
-	"time"
 )
 
 func main() {
@@ -33,9 +33,31 @@ func main() {
 		setLog(constant.GetLevel())
 	}
 	sql.SetEngine()
-	time.Sleep(1 * time.Hour)
+
+	err := filepath.Walk(constant.GetRoot(), func(p string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if info.IsDir() {
+			absPath, err := filepath.Abs(p)
+			if err != nil {
+				return err
+			}
+			fmt.Printf("准备处理的文件夹%v\n", info.Name())
+			files := util.GetAllFiles(absPath)
+			for _, file := range files {
+				conv.ProcessImage(*mediainfo.GetBasicInfo(file))
+			}
+
+		}
+		return nil
+	})
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
 	files := util.GetAllFiles(constant.Root)
-	fmt.Printf("符合条件的文件%v\n", files)
+
 	for _, file := range files {
 		conv.ProcessImage(*mediainfo.GetBasicInfo(file))
 	}

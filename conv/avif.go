@@ -37,9 +37,12 @@ func ProcessImage(in mediainfo.BasicInfo) {
 	cleanName := replace.ForFileName(in.PurgeName)
 	out := strings.Join([]string{in.PurgePath, string(os.PathSeparator), cleanName, ".avif"}, "")
 
-	cmd := exec.Command("ffmpeg", "-i", in.FullPath, "-c:v", "libaom-av1", "-still-picture", "1", out)
+	cmd := exec.Command("ffmpeg", "-y", "-i", in.FullPath, "-c:v", "libaom-av1", "-still-picture", "1", out)
 	slog.Debug("ffmpeg", slog.Any("生成的命令", fmt.Sprint(cmd)))
-	util.ExecCommand(cmd, "")
+	if err := util.ExecCommand(cmd, ""); err != nil {
+		//log.Fatalln("命令出现严重错误")
+		os.Exit(-1)
+	}
 	originsize, _ := util.GetSize(in.FullPath)
 	aftersize, _ := util.GetSize(out)
 	sub, _ := util.GetDiffSize(originsize, aftersize)
