@@ -1,18 +1,19 @@
 package constant
 
+import "runtime"
+
 var (
 	Root string = "/data" // 工作目录 如果为空  默认/data
 	//Root      string = "/mnt/d/backup/.telegram" // 工作目录 如果为空  默认/data
-	To        string = "vp9"   // 转换到的编码 如果为空  默认vp9
-	Level     string = "Debug" //日志的输出等级
-	Direction string = "ToRight"
+	CpuNums int = runtime.NumCPU() // 核心数
 )
 
-func GetDirection() string {
-	return Direction
-}
-func SetDirection(s string) {
-	Direction = s
+const (
+	MaxCPU = 12
+)
+
+func GetCpuNums() int {
+	return CpuNums
 }
 
 func GetRoot() string {
@@ -20,17 +21,4 @@ func GetRoot() string {
 }
 func SetRoot(s string) {
 	Root = s
-}
-
-func GetTo() string {
-	return To
-}
-func SetTo(s string) {
-	To = s
-}
-func GetLevel() string {
-	return Level
-}
-func SetLevel(s string) {
-	Level = s
 }

@@ -2,8 +2,7 @@ package util
 
 import (
 	"bufio"
-	"fmt"
-	"log/slog"
+	"log"
 	"os"
 )
 
@@ -14,7 +13,7 @@ func GetExitStatus() bool {
 }
 
 func SetExitStatus(b bool) {
-	slog.Debug("改变退出状态")
+	log.Println("改变退出状态")
 	ExitAfterDone = b
 }
 func ExitAfterRun() {
@@ -23,11 +22,11 @@ func ExitAfterRun() {
 		for {
 			input, _ := reader.ReadString('\n')
 			// todo os.IsExist()
-			fmt.Printf("You entered is %T\t%v sss \n", input, input)
+			log.Printf("You entered is %T\t%v sss \n", input, input)
 			if input == "q\n" || input == "q\r\n" {
-				slog.Debug("接收到q")
+				log.Println("接收到q")
 				SetExitStatus(true)
-				slog.Info("退出状态改变", slog.Bool("新值", ExitAfterDone))
+				log.Printf("退出状态改变%v\n", ExitAfterDone)
 			}
 		}
 	}()

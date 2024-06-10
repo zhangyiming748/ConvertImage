@@ -190,6 +190,6 @@ func (bi *BasicInfo) InsertVideoInfo() {
 	}
 	var v VideoInfo
 	json.Unmarshal(output, &v)
-	//fmt.Println(v)
+	//log.Println(v)
 	bi.VInfo = v
 }

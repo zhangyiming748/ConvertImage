@@ -1,7 +1,7 @@
 package util
 
 import (
-	"fmt"
+	"log"
 	"time"
 )
 
@@ -13,8 +13,8 @@ func WorkWithTimeout(timeout time.Duration) {
 	}()
 	select { //只执行最先到来的case
 	case <-workCh: //work先结束
-		fmt.Println("work finish")
+		log.Println("work finish")
 	case <-time.After(timeout): //超时先来
-		fmt.Println("work timeout")
+		log.Println("work timeout")
 	}
 }

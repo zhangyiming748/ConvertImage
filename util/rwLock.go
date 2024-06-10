@@ -1,8 +1,8 @@
 package util
 
 import (
-	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"sync"
 )
@@ -31,7 +31,7 @@ func writeFile(filePath string, data string) {
 	if err != nil && os.IsNotExist(err) {
 		file, err := os.Create(filePath)
 		if err != nil {
-			fmt.Println("Error creating file:", err)
+			log.Println("Error creating file:", err)
 			return
 		}
 		defer file.Close()
@@ -39,12 +39,12 @@ func writeFile(filePath string, data string) {
 		rwMutex.Lock()
 		_, err = file.WriteString(data)
 		if err != nil {
-			fmt.Println("Error writing to file:", err)
+			log.Println("Error writing to file:", err)
 			return
 		}
 		rwMutex.Unlock()
 	} else {
-		fmt.Println("File already exists")
+		log.Println("File already exists")
 	}
 }
 
@@ -52,19 +52,19 @@ func readFile(filePath string) {
 	rwMutex := new(sync.RWMutex)
 	_, err := os.Stat(filePath)
 	if err != nil && os.IsNotExist(err) {
-		fmt.Println("File does not exist")
+		log.Println("File does not exist")
 		return
 	} else if err != nil {
-		fmt.Println("Error reading file:", err)
+		log.Println("Error reading file:", err)
 		return
 	}
 
 	rwMutex.RLock()
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		fmt.Println("Error reading from file:", err)
+		log.Println("Error reading from file:", err)
 		return
 	}
-	fmt.Println(string(data))
+	log.Println(string(data))
 	rwMutex.RUnlock()
 }

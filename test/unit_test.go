@@ -1,7 +1,7 @@
 package test
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"testing"
@@ -25,11 +25,11 @@ func getAllFolder(path string) {
 			if err != nil {
 				return err
 			}
-			fmt.Println(absPath)
+			log.Println(absPath)
 		}
 		return nil
 	})
 	if err != nil {
-		fmt.Println("Error:", err)
+		log.Println("Error:", err)
 	}
 }

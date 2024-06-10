@@ -2,7 +2,7 @@
 echo 删除旧的日志文件
 find . -type f -name "*.log" -exec rm {} \;
 echo 格式化当前目录下go文件
-find . ! -path "./vendor/*" -name "*.go" -exec gofmt -w {} \;
+find . ! -path "./vendor/*" -name "*.go" -exec golog -w {} \;
 echo 删除多余隐藏文件
 find . -name "*DS_Store*" -exec rm {} \;
 echo 编译二进制文件forLinux32
