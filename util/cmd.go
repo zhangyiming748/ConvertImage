@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -28,7 +29,7 @@ func ExecCommand(c *exec.Cmd, msg string) (e error) {
 		_, err := stdout.Read(tmp)
 		t := string(tmp)
 		t = strings.Replace(t, "\u0000", "", -1)
-		log.Printf("%v\n%v\n", t, msg)
+		fmt.Printf("%v\n%v\n", t, msg)
 		if err != nil {
 			break
 		}
