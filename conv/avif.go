@@ -20,7 +20,7 @@ func ProcessImage(in mediainfo.BasicInfo) {
 	cmd := exec.Command("ffmpeg", "-y", "-i", in.FullPath, "-c:v", "libaom-av1", "-still-picture", "1", out)
 	log.Printf("ffmpeg生成的命令:%v\n", cmd.String())
 	if err := util.ExecCommand(cmd, in.FullPath); err != nil {
-		os.Exit(-1)
+		log.Fatalf("ffmpeg命令%s运行中产生错误:%v\n", cmd.String(), err)
 	}
 	originsize, _ := util.GetSize(in.FullPath)
 	aftersize, _ := util.GetSize(out)
@@ -29,5 +29,7 @@ func ProcessImage(in mediainfo.BasicInfo) {
 	//todo 如果新文件比源文件还大 不删除源文件
 	if aftersize < originsize {
 		os.Remove(in.FullPath)
+	} else {
+		log.Printf("新文件:s比源文件:%s还大 不删除源文件", in.FullPath, out)
 	}
 }

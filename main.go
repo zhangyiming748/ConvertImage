@@ -5,13 +5,12 @@ import (
 	"github.com/zhangyiming748/ConvertImage/conv"
 	"github.com/zhangyiming748/ConvertImage/mediainfo"
 	"github.com/zhangyiming748/ConvertImage/util"
-	"gopkg.in/natefinch/lumberjack.v2"
+	"github.com/zhangyiming748/lumberjack"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 )
 
 func init() {
@@ -39,24 +38,9 @@ func main() {
 			log.Printf("准备处理的文件夹%v\n", info.Name())
 
 			files := util.GetAllFiles(absPath)
-			cpus := constant.GetCpuNums()
-			if cpus > constant.MaxCPU {
-				cpus = constant.MaxCPU
-			}
-			var wg sync.WaitGroup
-			ch := make(chan struct{}, cpus/4)
-			log.Printf("CPU个数:%d\t协程缓冲区:%d\n", constant.GetCpuNums(), cpus/4)
 			for _, file := range files {
-				f := file
-				go func() {
-					ch <- struct{}{}
-					wg.Add(1)
-					conv.ProcessImage(*mediainfo.GetBasicInfo(f))
-					wg.Done()
-					<-ch
-				}()
+				conv.ProcessImage(*mediainfo.GetBasicInfo(file))
 			}
-			wg.Wait()
 		}
 		return nil
 	})

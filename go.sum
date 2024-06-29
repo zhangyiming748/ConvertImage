@@ -1,2 +1,2 @@
-gopkg.in/natefinch/lumberjack.v2 v2.2.1 h1:bBRl1b0OH9s/DuPhuXpNl+VtCaJXFZ5/uEFST95x9zc=
-gopkg.in/natefinch/lumberjack.v2 v2.2.1/go.mod h1:YD8tP3GAjkrDg1eZH7EGmyESg/lsYskCTPBJVb9jqSc=
+github.com/zhangyiming748/lumberjack v0.0.1 h1:/r1XMBfGVZ/ZrRU56vl0aKeVddidi3388ETLLCWxoW4=
+github.com/zhangyiming748/lumberjack v0.0.1/go.mod h1:11eemyl+ecJVHsV0uA62hHy+geuwthU0Y2owuM9TXdI=

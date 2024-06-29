@@ -3,7 +3,7 @@ package constant
 import "runtime"
 
 var (
-	Root string = "/data" // 工作目录 如果为空  默认/data
+	Root string = "/media/zen/swap/telegram" // 工作目录 如果为空  默认/data
 	//Root      string = "/mnt/d/backup/.telegram" // 工作目录 如果为空  默认/data
 	CpuNums int = runtime.NumCPU() // 核心数
 )

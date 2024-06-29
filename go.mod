@@ -1,5 +1,7 @@
 module github.com/zhangyiming748/ConvertImage
 
-go 1.21
+go 1.22
 
-require gopkg.in/natefinch/lumberjack.v2 v2.2.1
+toolchain go1.22.3
+
+require github.com/zhangyiming748/lumberjack v0.0.1
