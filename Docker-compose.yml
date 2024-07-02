@@ -3,9 +3,9 @@ name: conv_image
 services:
   conv:
     container_name: 'pictures'
-    image: zhangyiming748/convert_images
+    image: zhangyiming748/convert_images:v0.0.3
     volumes:
-      - '/c/Users/zen/Pictures/Screenshots:/data'
+      - '/home/zen/Pictures/raw/Raw:/data'
     deploy:
       resources:
         limits:
@@ -13,4 +13,4 @@ services:
           cpus: '4'
     environment:
       - root=/data
-      - level=Debug
+
