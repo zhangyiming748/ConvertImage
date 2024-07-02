@@ -17,7 +17,7 @@ RUN go build -o /usr/local/bin/conv main.go
 RUN chmod +x /usr/local/bin/conv
 
 # 第二阶段：构建arm64镜像
-FROM arm64v8/golang:1.22.4-bookworm as builder-arm64
+FROM arm64/golang:1.22.4-bookworm as builder-arm64
 LABEL authors="zen"
 COPY debian.sources /etc/apt/sources.list.d/
 RUN apt update
