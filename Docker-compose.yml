@@ -2,11 +2,8 @@ version: '3.9'
 name: conv_image
 services:
   conv:
-    container_name: 'conv'
-    build:
-      context: .
-      dockerfile: Dockerfile
-      cache_from: []
+    container_name: 'images'
+    image: zhangyiming748/convert_images
     volumes:
       - '/c/Users/zen/Pictures/Screenshots:/data'
     deploy:
