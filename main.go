@@ -55,7 +55,7 @@ func main() {
 func setLog() {
 	// 创建一个用于写入文件的Logger实例
 	fileLogger := &lumberjack.Logger{
-		Filename:   strings.Join([]string{constant.GetRoot(), "mylog.log"}, string(os.PathSeparator)),
+		Filename:   strings.Join([]string{constant.GetRoot(), "avif.log"}, string(os.PathSeparator)),
 		MaxSize:    1, // MB
 		MaxBackups: 3,
 		MaxAge:     28, // days
