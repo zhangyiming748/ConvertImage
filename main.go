@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/zhangyiming748/ConvertImage/constant"
 	"github.com/zhangyiming748/ConvertImage/conv"
-	"github.com/zhangyiming748/ConvertImage/mediainfo"
 	"github.com/zhangyiming748/ConvertImage/util"
 	"github.com/zhangyiming748/lumberjack"
 	"io"
@@ -38,7 +37,7 @@ func main() {
 			log.Printf("准备处理的文件夹:%v\n", info.Name())
 			files := util.GetAllFiles(absPath)
 			for _, file := range files {
-				conv.ProcessImage(*mediainfo.GetBasicInfo(file))
+				conv.ProcessImage(*util.GetBasicInfo(file))
 			}
 		}
 		return nil
