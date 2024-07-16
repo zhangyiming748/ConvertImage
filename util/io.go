@@ -2,11 +2,11 @@ package util
 
 import (
 	"bufio"
+	"github.com/zhangyiming748/filetype"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 func ReadByLine(fp string) []string {
@@ -50,28 +50,34 @@ func WriteByLine(fp string, s []string) {
 获取当前文件夹和全部子文件夹下视频文件
 */
 
-func GetAllFiles(root string) (files []string) {
-	patterns := []string{"jpeg", "jpg", "png", "webp", "tif"}
-	for _, pattern := range patterns {
-		files = append(files, getFilesByExtension(root, pattern)...)
+func isImageWithoutAVIF(file string) bool {
+	// Open a buf descriptor
+	buf, _ := os.Open(file)
+	// We only have to pass the buf header = first 261 bytes
+	head := make([]byte, 261)
+	buf.Read(head)
+	if filetype.IsImage(head) {
+		if filetype.IsMIME(head, "image/avif") {
+			log.Printf("%v已经是avif文件，跳过\n", file)
+			return false
+		} else {
+			log.Printf("%v不是avif文件，转换\n", file)
+			return true
+		}
 	}
-	return files
+	return false
 }
 
 /*
 获取当前文件夹和全部子文件夹下指定扩展名的全部文件
 */
-func getFilesByExtension(root, extension string) []string {
+func GetAllFiles(path string) []string {
 	var files []string
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println("获取文件出错")
-			os.Exit(-1)
-		}
-	}()
-	filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() && strings.HasSuffix(info.Name(), extension) {
-			files = append(files, path)
+	filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			if isImageWithoutAVIF(p) {
+				files = append(files, p)
+			}
 		}
 		return nil
 	})
