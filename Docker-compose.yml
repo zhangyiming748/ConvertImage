@@ -2,8 +2,8 @@ version: '3.9'
 name: conv_image
 services:
   conv:
-    container_name: 'pictures'
-    image: zhangyiming748/convert_images:v0.0.14
+    container_name: 'avif'
+    image: zhangyiming748/convert_images:latest
     volumes:
       - '/home/zen/Pictures/raw/Raw:/data'
     deploy:
