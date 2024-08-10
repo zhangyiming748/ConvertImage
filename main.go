@@ -14,7 +14,7 @@ func init() {
 	mylog.SetLog()
 }
 func main() {
-	//os.Setenv("root", "/mnt/d/images")
+	//os.Setenv("root", "/home/zen/share/Videos")
 	if root := os.Getenv("root"); root == "" {
 		log.Printf("$root为空,使用默认值:%v\n", constant.GetRoot())
 	} else {
