@@ -27,4 +27,5 @@ func main() {
 		bar.Set(i)
 		conv.ProcessImage(file)
 	}
+	log.Println("任务完成")
 }

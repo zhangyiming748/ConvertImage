@@ -10,6 +10,6 @@ services:
         limits:
           memory: 8192M
           cpus: '4'
-    environment:
-      - root=/data
+#    environment:
+#      - root=/data
 
