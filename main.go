@@ -10,9 +10,6 @@ import (
 	"os"
 )
 
-func init() {
-	mylog.SetLog()
-}
 func main() {
 	//os.Setenv("root", "/home/zen/share/Videos")
 	if root := os.Getenv("root"); root == "" {
@@ -21,6 +18,7 @@ func main() {
 		constant.SetRoot(root)
 		log.Printf("$root不为空:%v\n", constant.GetRoot())
 	}
+	mylog.SetLog()
 	files := util.GetAllFiles(constant.GetRoot())
 	length := len(files)
 	bar := progressbar.New(length)
